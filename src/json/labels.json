@@ -1,0 +1,23 @@
+{
+    "users" : {
+        "email" : {
+            "email_required_label" : "Email is required",
+            "invalid_email_format_label" : "Invalid email format!"
+        },
+        "password":{
+            "password_required_label": "Password is required",
+            "invalid_password_format_label" : "The password must contain min 5 characters, one uppercase character and one number.",
+            "incorrect_password_label" : "The password is incorrect!"
+        },
+        "username" : {
+            "username_required_label": "Username is required",
+            "username_already_exists_label" : "This username already exists!"
+        },
+        "generic" : {
+            "user_already_exists_label" : "This user already exists!",
+            "user_do_not_exists" : "There is no user with this email!",
+            "user_created_succesfuly" : "The user was created succesfuly!",
+            "user_was_logged_in" : "Log in succesfuly!"
+        }
+    }
+}
