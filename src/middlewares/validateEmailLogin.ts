@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "../appconfig";
 import labels from "../json/labels.json";
-import { getUserByEmail } from "../db/users";
+import { getUserByEmail } from "../db/userModel";
 
 export const validateEmailLogin = async (
     req: Request,

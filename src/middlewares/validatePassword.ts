@@ -9,17 +9,15 @@ export const validatePassword = (
 ) => {
   const { password } = req.body;
 
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{5,}$/;
+  if(password)
+  {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{5,}$/;
 
-  if (!password)
-    return res.status(StatusCodes.BadRequest).json({
-      message: labels.users.password.password_required_label,
-      statusCode: StatusCodes.BadRequest,
-    });
-  else if (!passwordRegex.test(password)) {
-    return res
-      .status(StatusCodes.BadRequest)
-      .json({ message: labels.users.password.invalid_password_format_label });
+    if (!passwordRegex.test(password)) {
+      return res
+        .status(StatusCodes.BadRequest)
+        .json({ message: labels.users.password.invalid_password_format });
+    }
   }
   next();
 };

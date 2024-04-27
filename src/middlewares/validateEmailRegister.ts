@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "../appconfig";
 import labels from "../json/labels.json";
-import { getUserByEmail } from "../db/users";
+import { getUserByEmail } from "../db/userModel";
 
 export const validateEmailRegister = async (
     req: Request,
@@ -16,7 +16,7 @@ export const validateEmailRegister = async (
         return res
             .status(StatusCodes.BadRequest)
             .json({
-                message: labels.users.generic.user_already_exists_label,
+                message: labels.users.generic.user_already_exists,
                 statusCode: StatusCodes.BadRequest,
             });
     }

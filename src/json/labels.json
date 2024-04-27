@@ -1,23 +1,48 @@
 {
     "users" : {
         "email" : {
-            "email_required_label" : "Email is required",
-            "invalid_email_format_label" : "Invalid email format!"
+            "email_required" : "Email is required",
+            "invalid_email_format" : "Invalid email format!"
         },
         "password":{
-            "password_required_label": "Password is required",
-            "invalid_password_format_label" : "The password must contain min 5 characters, one uppercase character and one number.",
-            "incorrect_password_label" : "The password is incorrect!"
+            "password_required": "Password is required",
+            "invalid_password_format" : "The password must contain min 5 characters, one uppercase character and one number.",
+            "incorrect_password" : "The password is incorrect!"
         },
         "username" : {
-            "username_required_label": "Username is required",
-            "username_already_exists_label" : "This username already exists!"
+            "username_required": "Username is required",
+            "username_already_exists" : "This username already exists!"
+        },
+        "sessionToken" : {
+            "no_session_token" : "No session token available!",
+            "no_logged_user" : "You must log in!",
+            "not_account_owner" : "You can't do this operation because you are not this account''s owner!"
         },
         "generic" : {
-            "user_already_exists_label" : "This user already exists!",
-            "user_do_not_exists" : "There is no user with this email!",
+            "user_already_exists" : "This user already exists!",
+            "user_do_not_exists" : "No user found!",
             "user_created_succesfuly" : "The user was created succesfuly!",
-            "user_was_logged_in" : "Log in succesfuly!"
+            "user_was_logged_in" : "Log in succesfuly!",
+            "user_deleted_succesfuly" : "User deleted succesfuly!",
+            "user_updated_succesfuly" : "User updated succesfuly!"
+        }
+    },
+    "breeds" : {
+        "name" : {
+            "name_required": "Name is required",
+            "name_already_exists" : "This breed name already exists!"
+        },
+        "price" : {
+            "price_required": "Price is required",
+            "price_invalid_format" : "Invalid price format!",
+            "negative_price" : "The price must be at least 0!"
+        },
+        "generic" : 
+        {
+            "breed_do_not_exists" : "No breed found!",
+            "breed_created_succesfuly" : "The breed was created succesfuly!",
+            "breed_deleted_succesfuly" : "Breed deleted succesfuly!",
+            "breed_updated_succesfuly" : "Breed updated succesfuly!"
         }
     }
 }

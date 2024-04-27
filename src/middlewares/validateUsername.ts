@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "../appconfig";
 import labels from "../json/labels.json";
-import { getUserByUsername } from "../db/users";
+import { getUserByUsername } from "../db/userModel";
 
 export const validateUsername = async (
     req : Request,
@@ -10,19 +10,14 @@ export const validateUsername = async (
 ) => {
     const { username } = req.body
     
-    if(!username)
-        return res.status(StatusCodes.BadRequest).json({
-            message : labels.users.username.username_required_label,
-            statusCode : StatusCodes.BadRequest
-    })
-    else
+    if(username)
     {
         const existingUser = await getUserByUsername(username)
 
         if(existingUser)
         {
             return res.status(StatusCodes.BadRequest).json({
-                message : labels.users.username.username_already_exists_label,
+                message : labels.users.username.username_already_exists,
                 statusCode : StatusCodes.BadRequest
             })
         }
