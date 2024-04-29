@@ -3,22 +3,20 @@ import { StatusCodes } from "../appconfig";
 import labels from "../json/labels.json";
 import { getBreedbyId } from "../db/breedModel";
 
-export const validateBreedId = async (
+export const validateBreedRequired = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
     try
     {
-        const { id } = req.params;
-
-        const existingBreed = await getBreedbyId(id);
+        const { breedId } = req.body;
     
-        if (!existingBreed) {
+        if (!breedId) {
             return res
                 .status(StatusCodes.BadRequest)
                 .json({
-                    message: labels.breeds.generic.breed_do_not_exists,
+                    message: labels.breeds.generic.breed_is_required,
                     statusCode: StatusCodes.BadRequest,
                 });
         }

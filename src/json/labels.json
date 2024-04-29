@@ -39,10 +39,32 @@
         },
         "generic" : 
         {
+            "breed_is_required" : "Breed is required!",
             "breed_do_not_exists" : "No breed found!",
             "breed_created_succesfuly" : "The breed was created succesfuly!",
             "breed_deleted_succesfuly" : "Breed deleted succesfuly!",
             "breed_updated_succesfuly" : "Breed updated succesfuly!"
         }
+    },
+    "cats" : {
+        "name" : {
+            "name_required": "Name is required"
+        },
+        "birthDate" : 
+        {
+            "invalid_date_format" : "Invalid date format!"
+        },
+        "generic" : 
+        {
+            "cat_do_not_exists" : "No cat found!",
+            "cat_created_succesfuly" : "The cat was created succesfuly!",
+            "cat_deleted_succesfuly" : "Cat deleted succesfuly!",
+            "cat_updated_succesfuly" : "Cat updated succesfuly!"
+        }
+    },
+    "filters" : {
+        "invalid_sortDirection" : "Invalid sortDirection!",
+        "invalid_pageSize" : "Invalid pageSize (should be > 0)!",
+        "invalid_pageIndex" : "Invalid pageIndex (should be at least 1)!"
     }
 }

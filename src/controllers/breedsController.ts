@@ -5,7 +5,8 @@ import { deleteBreedById, getBreeds, getBreedbyId, createBreed } from '../db/bre
 
 export const getAllBreeds = async (req: express.Request, res: express.Response) => {
     try {
-        const breeds = await getBreeds()
+        const breeds = await getBreeds(req.query)
+
         return res.status(StatusCodes.Succes).json(breeds)
     }
     catch (error) {
@@ -39,7 +40,6 @@ export const deleteBreed = async (req: express.Request, res: express.Response) =
     try {
         const { id } = req.params
         const deletedBreed = await deleteBreedById(id)
-        console.log(deletedBreed)
         return res.status(StatusCodes.Succes).json({
             message: labels.breeds.generic.breed_deleted_succesfuly,
             statusCode: StatusCodes.Succes,

@@ -28,5 +28,8 @@ export class Routes {
 
     //BREEDS
     public static readonly BREEDS : string = '/breeds'
+    
+    //CATS
+    public static readonly CATS : string = '/cats'
 }
 
