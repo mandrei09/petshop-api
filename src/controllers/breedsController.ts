@@ -26,7 +26,7 @@ export const addBreed = async (req: express.Request, res: express.Response) => {
         .json({
           message: labels.breeds.generic.breed_created_succesfuly,
           statusCode: StatusCodes.Succes,
-          user: breed,
+          breed: breed,
         });
   
     } 

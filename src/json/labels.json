@@ -46,6 +46,30 @@
             "breed_updated_succesfuly" : "Breed updated succesfuly!"
         }
     },
+    "vaccines" : {
+        "name" : {
+            "name_required": "Name is required",
+            "name_already_exists" : "This vaccine name already exists!"
+        },
+        "price" : {
+            "price_required": "Price is required",
+            "price_invalid_format" : "Invalid price format!",
+            "negative_price" : "The price must be at least 0!"
+        },
+        "expiringInMonths" : {
+            "expring_required": "Expiring in months is required",
+            "expring_invalid_format" : "Invalid expiring in months format!",
+            "negative_expiring" : "Expiring in months value must be at least 0!"
+        },
+        "generic" : 
+        {
+            "vaccine_is_required" : "Vaccine is required!",
+            "vaccine_do_not_exists" : "No vaccine found!",
+            "vaccine_created_succesfuly" : "The vaccine was created succesfuly!",
+            "vaccine_deleted_succesfuly" : "Vaccine deleted succesfuly!",
+            "vaccine_updated_succesfuly" : "Vaccine updated succesfuly!"
+        }
+    },
     "cats" : {
         "name" : {
             "name_required": "Name is required"

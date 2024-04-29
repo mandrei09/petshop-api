@@ -9,7 +9,7 @@ export const BreedSchema = new mongoose.Schema({
 
 export const Breed = mongoose.model("Breed", BreedSchema);
 
-export const breedProperty = 'breed'
+export const breedPrefix = 'breed'
 
 export const getBreeds = async (filters? : any) => 
 {

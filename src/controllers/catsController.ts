@@ -4,7 +4,8 @@ import labels from "../json/labels.json";
 import { createCat, deleteCatById, getCatbyId, getCats } from '../db/catModel';
 import { calculateAge } from '../helpers/calculateAge'
 import { getBreedbyId } from '../db/breedModel';
-import { Types } from 'mongoose';
+import { getVaccineById } from '../db/vaccineModel';
+import { addMonths } from '../helpers/addMonths';
 
 export const getAllCats = async (req: express.Request, res: express.Response) => {
   try {
@@ -19,13 +20,18 @@ export const getAllCats = async (req: express.Request, res: express.Response) =>
 
 export const addCat = async (req: express.Request, res: express.Response) => {
   try {
-    const { name, breedId, birthDate } = req.body;
+    const { name, breedId, birthDate, vaccineId } = req.body;
 
     const age = await calculateAge(new Date(birthDate))
 
     const breed = await getBreedbyId(breedId)
 
-    const cat = await createCat({ name, breed, birthDate, age });
+    const vaccine = await getVaccineById(vaccineId)
+
+    vaccine!.administratedAt = new Date()
+    vaccine!.expiringAt = addMonths(vaccine!.expiringInMonths)
+
+    const cat = await createCat({ name, breed, birthDate, age, vaccine });
 
     return res
       .status(StatusCodes.Succes)
@@ -34,7 +40,6 @@ export const addCat = async (req: express.Request, res: express.Response) => {
         statusCode: StatusCodes.Succes,
         cat: cat,
       });
-
   }
   catch (error) {
     console.log(error);
@@ -61,7 +66,7 @@ export const deleteCat = async (req: express.Request, res: express.Response) => 
 export const updateCat = async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params
-    const { name, breedId, birthDate } = req.body
+    const { name, breedId, birthDate, vaccineId } = req.body
 
     const cat = await getCatbyId(id)
 
@@ -70,15 +75,25 @@ export const updateCat = async (req: express.Request, res: express.Response) => 
     }
 
     if (breedId) {
-      const breedObjectId = new Types.ObjectId(breedId);
-      cat!.breed = breedObjectId;
+      const breed = await getBreedbyId(breedId)
+      if (breed) {
+        cat!.breed = breed
+      }
     }
 
-    if(birthDate)
-    {
+    if (birthDate) {
       cat!.birthDate = birthDate
       const age = await calculateAge(new Date(birthDate))
       cat!.age = age
+    }
+
+    if (vaccineId) {
+      const vaccine = await getVaccineById(vaccineId)
+      if (vaccine) {
+        cat!.vaccine = vaccine
+        vaccine!.administratedAt = new Date()
+        vaccine!.expiringAt = addMonths(vaccine!.expiringInMonths)
+      }
     }
 
     await cat!.save()

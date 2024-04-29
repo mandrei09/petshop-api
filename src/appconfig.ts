@@ -25,11 +25,16 @@ export class Routes {
 
     //USERS
     public static readonly USERS : string = '/users'
+    public static readonly ADD_CAT : string = '/addCat/:id'
 
     //BREEDS
     public static readonly BREEDS : string = '/breeds'
     
     //CATS
     public static readonly CATS : string = '/cats'
+
+    //VACCINES
+    public static readonly VACCINES : string = '/vaccines'
+
 }
 

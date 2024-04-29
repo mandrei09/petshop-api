@@ -3,10 +3,11 @@ import { deleteUserById, getUserById, getUserByUsername, getUsers } from '../db/
 import { StatusCodes } from '../appconfig'
 import labels from "../json/labels.json";
 import { authentication, random } from '../helpers';
+import { getCatbyId } from '../db/catModel';
 
 export const getAllUsers = async (req: express.Request, res: express.Response) => {
     try {
-        const users = await getUsers()
+        const users = await getUsers(req.query)
         return res.status(StatusCodes.Succes).json(users)
     }
     catch (error) {
@@ -56,6 +57,36 @@ export const updateUser = async (req: express.Request, res: express.Response) =>
             user!.authentication = {
                 salt,
                 password: authentication(salt, password),
+            }
+        }
+       
+        await user!.save()
+
+        return res.status(StatusCodes.Succes).json({
+            message: labels.users.generic.user_updated_succesfuly,
+            statusCode: StatusCodes.Succes,
+            user: user
+        });
+    }
+    catch (error) {
+        console.log(error)
+        return res.sendStatus(StatusCodes.BadRequest)
+    }
+}
+
+export const addCatToUser = async (req: express.Request, res: express.Response) => {
+    try {
+        const { id } = req.params
+        const { catId } = req.body
+
+        const user = await getUserById(id)
+
+        if(catId)
+        {
+            const cat = await getCatbyId(catId)
+            if(cat)
+            {
+                user!.cat = cat
             }
         }
        

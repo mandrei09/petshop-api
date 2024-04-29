@@ -1,27 +1,31 @@
 import { Request, Response, NextFunction } from "express";
 import { StatusCodes } from "../appconfig";
 import labels from "../json/labels.json";
-import { getCatbyId } from "../db/catModel";
+import { getVaccineById } from "../db/vaccineModel";
 
-export const validateCatIdParams = async (
+export const validateVaccineIdBody = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
     try
     {
-        const { id } = req.params;
+        const { vaccineId } = req.body;
 
-        const existingCat = await getCatbyId(id);
+        if(vaccineId)
+        {
+            const existingVaccine = await getVaccineById(vaccineId);
     
-        if (!existingCat) {
-            return res
-                .status(StatusCodes.BadRequest)
-                .json({
-                    message: labels.cats.generic.cat_do_not_exists,
-                    statusCode: StatusCodes.BadRequest,
-                });
+            if (!existingVaccine) {
+                return res
+                    .status(StatusCodes.BadRequest)
+                    .json({
+                        message: labels.vaccines.generic.vaccine_do_not_exists,
+                        statusCode: StatusCodes.BadRequest,
+                    });
+            }
         }
+        
     }
 
     catch(error)
@@ -31,7 +35,7 @@ export const validateCatIdParams = async (
             return res
                 .status(StatusCodes.BadRequest)
                 .json({
-                    message: labels.cats.generic.cat_do_not_exists,
+                    message: labels.vaccines.generic.vaccine_do_not_exists,
                     statusCode: StatusCodes.BadRequest,
                 });
         } 
@@ -44,22 +48,22 @@ export const validateCatIdParams = async (
     next();
 };
 
-export const validateCatIdBody = async (
+export const validateVaccineIdParams = async (
     req: Request,
     res: Response,
     next: NextFunction
 ) => {
     try
     {
-        const { catId } = req.body;
+        const { id } = req.params;
 
-        const existingCat = await getCatbyId(catId);
+        const existingVaccine = await getVaccineById(id);
     
-        if (!existingCat) {
+        if (!existingVaccine) {
             return res
                 .status(StatusCodes.BadRequest)
                 .json({
-                    message: labels.cats.generic.cat_do_not_exists,
+                    message: labels.vaccines.generic.vaccine_do_not_exists,
                     statusCode: StatusCodes.BadRequest,
                 });
         }
@@ -72,7 +76,7 @@ export const validateCatIdBody = async (
             return res
                 .status(StatusCodes.BadRequest)
                 .json({
-                    message: labels.cats.generic.cat_do_not_exists,
+                    message: labels.vaccines.generic.vaccine_do_not_exists,
                     statusCode: StatusCodes.BadRequest,
                 });
         } 

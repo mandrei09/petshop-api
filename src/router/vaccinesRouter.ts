@@ -1,37 +1,42 @@
 import express from 'express'
 import { isAuthenticated } from '../middlewares'
-import { addBreed, deleteBreed, getAllBreeds, updateBreed } from '../controllers/breedsController'
 import { Routes } from '../appconfig'
 import { validateNameRequired } from '../middlewares/validateNameRequired'
 import { validateName } from '../middlewares/validateName'
-import { validateBreedIdParams } from '../middlewares/validateBreedId'
+import { validateVaccineIdParams } from '../middlewares/validateVaccineId'
 import { validatePriceRequired } from '../middlewares/validatePriceRequired'
 import { validatePrice } from '../middlewares/validatePrice'
 import { validateSortDirection } from '../middlewares/validateSortDirection'
 import { validatePageSize } from '../middlewares/validatePageSize'
 import { validatePageIndex } from '../middlewares/validatePageIndex'
+import { addVaccine, deleteVaccine, getAllVaccines, updateVaccine } from '../controllers/vaccinesController'
+import { validateExpiringInMonthsRequired } from '../middlewares/validateExpiringInMonthsRequired'
+import { validateExpiringInMonths } from '../middlewares/validateExpiringInMonths'
 
 export default (router: express.Router) => {
-    router.get(Routes.BREEDS, 
+    router.get(Routes.VACCINES, 
         validateSortDirection,
         validatePageSize,
         validatePageIndex,
-        getAllBreeds)
-    router.post(Routes.BREEDS + Routes.CREATE, 
+        getAllVaccines)
+    router.post(Routes.VACCINES + Routes.CREATE, 
         isAuthenticated, 
         validateNameRequired, 
         validateName, 
         validatePriceRequired, 
-        validatePrice, 
-        addBreed)
-    router.delete(Routes.BREEDS + Routes.DELETE, 
+        validatePrice,
+        validateExpiringInMonthsRequired,
+        validateExpiringInMonths,
+        addVaccine)
+    router.delete(Routes.VACCINES + Routes.DELETE, 
         isAuthenticated, 
-        validateBreedIdParams, 
-        deleteBreed)
-    router.patch(Routes.BREEDS + Routes.UPDATE, 
+        validateVaccineIdParams, 
+        deleteVaccine)
+    router.patch(Routes.VACCINES + Routes.UPDATE, 
         isAuthenticated, 
-        validateBreedIdParams, 
+        validateVaccineIdParams, 
         validateName, 
-        validatePrice, 
-        updateBreed)
+        validatePrice,
+        validateExpiringInMonths,
+        updateVaccine)
 }
