@@ -14,7 +14,8 @@ import { validateExpiringInMonthsRequired } from '../middlewares/validateExpirin
 import { validateExpiringInMonths } from '../middlewares/validateExpiringInMonths'
 
 export default (router: express.Router) => {
-    router.get(Routes.VACCINES, 
+    router.get(Routes.VACCINES,
+        isAuthenticated, 
         validateSortDirection,
         validatePageSize,
         validatePageIndex,

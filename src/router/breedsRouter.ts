@@ -12,7 +12,8 @@ import { validatePageSize } from '../middlewares/validatePageSize'
 import { validatePageIndex } from '../middlewares/validatePageIndex'
 
 export default (router: express.Router) => {
-    router.get(Routes.BREEDS, 
+    router.get(Routes.BREEDS,
+        isAuthenticated, 
         validateSortDirection,
         validatePageSize,
         validatePageIndex,
